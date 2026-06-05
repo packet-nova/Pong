@@ -21,17 +21,5 @@ public class PaddleController : MonoBehaviour
         _rightRb = _rightPaddle.GetComponent<Rigidbody2D>();
         _leftBoxCollider = _rightPaddle.GetComponent<BoxCollider2D>();
         _rightBoxCollider = _rightPaddle.GetComponent<BoxCollider2D>();
-    }
-
-        //_rightRb.linearVelocity = new(0f, _rightMoveSpeed * 1f);
-
-        //if (_rightBoxCollider.IsTouching(_northWall.GetComponent<BoxCollider2D>()))
-        //{
-        //    _rightRb.linearVelocity = new(0f, _rightMoveSpeed * -1f);
-        //}
-        //else if(_rightBoxCollider.IsTouching(_southWall.GetComponent<BoxCollider2D>()))
-        //{
-        //    _rightRb.linearVelocity = new(0f, _rightMoveSpeed * 1f);
-        //}
-    
+    }    
 }

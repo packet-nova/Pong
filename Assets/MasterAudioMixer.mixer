@@ -35,6 +35,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 374b6e827b6811d4bbfb689b88954053
+    name: BGMVolume
   - guid: a573b85742264c046a74d2a3981196a3
     name: MasterVolume
   m_AudioMixerGroupViews:
@@ -90,9 +92,24 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: f6b03d20fbb9d254e8a9d7dcb00b4019
   m_FloatValues:
-    374b6e827b6811d4bbfb689b88954053: -25.086687
+    dcd683d16faf8a34a895af785856d03a: 0.505
+    374b6e827b6811d4bbfb689b88954053: -20
+    f67e0f04d5b9dda4eac3f5bdc8e4296c: 4
+    3b9f1774398280f47a16bae1953d3773: 100
+    8ec68994171bb7b4f9ed9df7d6125b39: -47.3
+    e9cee7352e57c2d4f819cc80e09d6e2d: 108
     3a23718552e7fe9489149877718b74da: -0.037667945
+    977de1a6d3a77bf4bb8ee7b273672d5d: 19.33
     a573b85742264c046a74d2a3981196a3: -0.27209902
+    d1cbc128190581f4eb61ae555503f54f: 0.284
+    bef919b8ad124bb43a5a8b7e38a51c04: 10
+    3c796c9984260e94a82f5589d7187aec: 11.82
+    9d1eea6a4f9b2a7409543b2248bc54a6: 21
+    a80bb63da2bdda34e97b95b28072bf71: 0
+    6e428c6d364b8a746a8924fef8251e23: 1
+    174ec8bd2d00e0943a5bd63246c7ed84: 2757
+    5f38346ec9543df45aabb61cb9395fb7: 0.45900002
+    350d00ce25b7a8a4cab3336cc89bb4ca: 0.5
   m_TransitionOverrides: {}
 --- !u!243 &4889981320509205161
 AudioMixerGroupController:

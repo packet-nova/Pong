@@ -1,14 +1,17 @@
 using UnityEngine;
 using Assets.Scripts;
-using System.Security.Cryptography;
+using UnityEngine.InputSystem;
 
 public enum Player { None, One, Two }
+public enum GameMode { VsComputer, VsHuman }
 
 public class GameManager : MonoBehaviour
 {
+    private static bool _isVersusComputer;
     private int _scorePlayerOne = 0;
     private int _scorePlayerTwo = 0;
     private Ball _ball;
+    private bool _isPaused;
 
     [SerializeField] private ScoreText _scoreTextPlayerOne;
     [SerializeField] private ScoreText _scoreTextPlayerTwo;
@@ -22,10 +25,22 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioManager _audioManager;
 
+    public bool IsVersusComputer => _isVersusComputer;
+
     public void Start()
     {
         SpawnBasicBall();
         GivePaddlesTheBall();
+        Debug.Log(IsVersusComputer);
+    }
+
+    public void Update()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            TogglePause();
+            //_audioManager.ToggleMuteAll();
+        }
     }
 
     public void BallEnteredScoreZone(ScoreData data)
@@ -60,12 +75,19 @@ public class GameManager : MonoBehaviour
         _ball = newBall;
     }
 
+    public void TogglePause()
+    {
+        _isPaused = !_isPaused;
+        _audioManager.ToggleMuteAll();
+        Time.timeScale = _isPaused ? 0f : 1f;
+    }
 
     private void GivePaddlesTheBall()
     {
         _leftPaddle.GetBall(_ball);
         _rightPaddle.GetBall(_ball);
     }
+    public static void ChangeOpponent(GameMode mode) => _isVersusComputer = (mode == GameMode.VsComputer);
 
     private void SpawnRandomBall()
     {
@@ -75,4 +97,3 @@ public class GameManager : MonoBehaviour
         Ball newBall = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
     }
 }
-

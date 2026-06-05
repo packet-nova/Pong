@@ -6,5 +6,7 @@ public class UIManager : MonoBehaviour
     public void PutSomethingInConsole()
     {
         Debug.Log("CLICKED");
+
+
     }
 }

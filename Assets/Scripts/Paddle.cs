@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class Paddle : MonoBehaviour
 {
@@ -37,52 +38,25 @@ public class Paddle : MonoBehaviour
 
         if (_playerController == Player.Two)
         {
-            if (Keyboard.current.upArrowKey.isPressed)
+            if (_gameManager.IsVersusComputer)
             {
-                input = 1f;
-            }
-
-            if (Keyboard.current.downArrowKey.isPressed)
-            {
-                input = -1f;
-            }
-
-            //if (_ball.transform.position.y != transform.position.y)
-            //{
-            //    transform.position = new(transform.position.x, _ball.transform.position.y);
-            //}
-        }
-
-        if (_playerController == Player.Two)
-        {
-            if (_ball == null)
-            {
-                Debug.Log("NO BALL!");
-                return;
-            }
-
-            float yDelta = Mathf.Abs(_ball.transform.position.y - transform.position.y);
-
-            if (_ball.transform.position.y > transform.position.y)
-            {
-                if (yDelta >= 0.6f)
-                {
-                    input = 1f;
-                }
-            }
-            else if (_ball.transform.position.y < transform.position.y)
-            {
-                if (yDelta >= 0.6f)
-                {
-                    input = -1f;
-                }
+                input = GetAIInput();
             }
 
             else
             {
-                input = 0f;
+                if (Keyboard.current.upArrowKey.isPressed)
+                {
+                    input = 1f;
+                }
+
+                if (Keyboard.current.downArrowKey.isPressed)
+                {
+                    input = -1f;
+                }
             }
         }
+
         _rigidBody.linearVelocity = new(0f, _moveSpeed * input);
     }
 
@@ -92,6 +66,31 @@ public class Paddle : MonoBehaviour
         {
             _gameManager.PaddleHitByBall(this);
         }
+    }
+
+    private float GetAIInput()
+    {
+        if (_ball == null)
+        {
+            Debug.Log("NO BALL!");
+            return 0f;
+        }
+
+        float yDelta = Mathf.Abs(_ball.transform.position.y - transform.position.y);
+
+        if (yDelta >= 0.6f)
+        {
+            if (_ball.transform.position.y < transform.position.y)
+            {
+                return -1f;
+            }
+            else if (_ball.transform.position.y > transform.position.y)
+            {
+                return 1f;
+            }
+        }
+
+        return 0;
     }
 
     public void GetBall(Ball ball) => _ball = ball;
