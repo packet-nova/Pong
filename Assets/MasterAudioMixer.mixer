@@ -39,6 +39,8 @@ AudioMixerController:
     name: BGMVolume
   - guid: a573b85742264c046a74d2a3981196a3
     name: MasterVolume
+  - guid: 3a23718552e7fe9489149877718b74da
+    name: SFXVolume
   m_AudioMixerGroupViews:
   - guids:
     - 497b7117bf81f4247998cae2cdc93cff

@@ -30,13 +30,19 @@ public class AudioManager : MonoBehaviour
         AudioClip selectedClip = paddle.PlayerController switch
         {
             Player.One => _leftPaddleHit,
-            Player.Two => _rightPaddleHit
+            Player.Two => _rightPaddleHit,
+            _ => _leftPaddleHit
         };
+
         _sfx.PlayOneShot(selectedClip, 3f);
     }
 
     public void ToggleMuteAll()
     {
-        AudioListener.volume = AudioListener.volume == 1f ? 0f : 1f;
+        _audioMixer.GetFloat("MasterVolume", out float current);
+        _audioMixer.SetFloat("MasterVolume", (current > -80f ? -80f : 0f));
     }
 }
+
+
+
