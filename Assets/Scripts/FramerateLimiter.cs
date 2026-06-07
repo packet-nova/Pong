@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FramerateLimiter : MonoBehaviour
 {
-    [SerializeField] private int _framerate = 60;
+    [SerializeField] private int _framerate;
 
     void Start()
     {
