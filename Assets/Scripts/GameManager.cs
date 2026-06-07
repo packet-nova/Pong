@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
 
     public void PaddleHitByBall(Paddle paddle) => _audioManager.PlayPaddleHitSound(paddle);
 
-    public void RestartGame() => SceneManager.LoadScene(0);
-    public void LoadMainMenu() => SceneManager.LoadScene(1);
+    public void RestartGame() => SceneManager.LoadScene("Pong");
+    public void LoadMainMenu() => SceneManager.LoadScene("MainMenu");
 
     private void SpawnBasicBall()
     {
