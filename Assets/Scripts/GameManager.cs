@@ -1,6 +1,7 @@
 using UnityEngine;
 using Assets.Scripts;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum Player { None, One, Two }
 public enum GameMode { VsComputer, VsHuman }
@@ -39,7 +40,6 @@ public class GameManager : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             TogglePause();
-            //_audioManager.ToggleMuteAll();
         }
     }
 
@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void PaddleHitByBall(Paddle paddle) => _audioManager.PlayPaddleHitSound(paddle);
+
+    public void RestartGame() => SceneManager.LoadScene(0);
+    public void LoadMainMenu() => SceneManager.LoadScene(1);
 
     private void SpawnBasicBall()
     {
