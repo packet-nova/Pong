@@ -14,10 +14,12 @@ public class GameManager : MonoBehaviour
     private Ball _ball;
     private bool _isPaused;
 
+    [SerializeField] private Camera _camera;
+
     [SerializeField] private ScoreText _scoreTextPlayerOne;
     [SerializeField] private ScoreText _scoreTextPlayerTwo;
-    [SerializeField] private ScoreZone _scoreZonePlayerOne;
-    [SerializeField] private ScoreZone _scoreZonePlayerTwo;
+    //[SerializeField] private ScoreZone _scoreZonePlayerOne;
+    //[SerializeField] private ScoreZone _scoreZonePlayerTwo;
 
     [SerializeField] private Ball _basicBallPrefab;
     [SerializeField] private Ball _fastBallPrefab;
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        SetupPaddles();
         SpawnBasicBall();
         GivePaddlesTheBall();
         Debug.Log(IsVersusComputer);
@@ -65,6 +68,14 @@ public class GameManager : MonoBehaviour
         GivePaddlesTheBall();
     }
 
+    private void SetupPaddles()
+    {
+        float halfWidth = _camera.orthographicSize * _camera.aspect;
+        float paddleOffset = 0.5f;
+
+        _leftPaddle.transform.position = new Vector3(-halfWidth + paddleOffset, 0, 0);
+        _rightPaddle.transform.position = new Vector3(halfWidth - paddleOffset, 0, 0);
+    }
     public void PaddleHitByBall(Paddle paddle) => _audioManager.PlayPaddleHitSound(paddle);
 
     public void RestartGame() => SceneManager.LoadScene("Pong");
@@ -91,12 +102,4 @@ public class GameManager : MonoBehaviour
         _rightPaddle.GetBall(_ball);
     }
     public static void ChangeOpponent(GameMode mode) => _isVersusComputer = (mode == GameMode.VsComputer);
-
-    private void SpawnRandomBall()
-    {
-        Ball prefabToSpawn = Random.Range(0f, 0.5f) > 0.1f ? _basicBallPrefab : _fastBallPrefab;
-        float randomY = Random.Range(-_basicBallPrefab.MaxStartY, _basicBallPrefab.MaxStartY);
-        Vector2 spawnPosition = new(0f, randomY);
-        Ball newBall = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-    }
 }

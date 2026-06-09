@@ -27,10 +27,16 @@ public class Ball : MonoBehaviour
     }
     private void InitialPush()
     {
-        
         Vector2 direction = Random.value < 0.5f ? Vector2.left : Vector2.right;
-        //direction.y = Random.Range(-_maxInitialAngle, _maxInitialAngle);
-        direction.y = Random.Range(-_maxInitialAngle, _maxInitialAngle);
+
+        float randomY = Random.Range(-_maxInitialAngle, _maxInitialAngle);
+
+        if (Mathf.Abs(randomY) < 0.1f)
+        {
+            randomY = 0.1f * (Random.value < 0.5f ? 1 : -1);
+        }
+
+        direction.y = randomY;
         _rigidBody2d.linearVelocity = direction.normalized * _moveSpeed;
     }
 
